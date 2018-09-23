@@ -28,11 +28,16 @@ Ignore value keypair deletion
 *  *"Name"=-* Will be ignored
 ### -NoEmptyKey
 Ignore Key having no KeyPair (Ignore key full tree declaration)
+
 ### -ErrorOnMultiDeclaration
 Return an error if a KeyPair is declared more than once
+
 ### -ErrorOnConflicts
 Return an error if a KeyPair is declared more than once with different values (will ignore by default)
+
 ### -ErrorOnUnreadableFile
 Return an error if input file is not readable
+
 ### -NoProgress
 Hide progress bar
+
