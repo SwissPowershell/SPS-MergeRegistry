@@ -1,7 +1,8 @@
 # SwissPowershell Merge Optimize and Clean Registry
 Powershell Function to merge optimize and clean registry file(s)
 
-## Merge-RegistryFiles Function### -InputFile
+## Merge-RegistryFiles Function
+### -InputFile
 File to merge / optimize location 
 ### -InputPath
 Path location containing registry files to merge
@@ -14,17 +15,17 @@ Registry File output Format (Version 4 or 5)
 ### -NoDeletion
 Ignore key and keypair deletion
 
-*[-HKEY_...]* Will be ignored
+*  *[-HKEY_...]* Will be ignored
 
-*"Name"=-* Will be ignored
+*  *"Name"=-* Will be ignored
 ### -NoKeyDeletion
 Ignore key deletion
 
-*[-HKEY_...]* Will be ignored
+*  *[-HKEY_...]* Will be ignored
 ### -NoValueDeletion
 Ignore value keypair deletion
 
-*"Name"=-* Will be ignored
+*  *"Name"=-* Will be ignored
 ### -NoEmptyKey
 Ignore Key having no KeyPair (Ignore key full tree declaration)
 ### -ErrorOnMultiDeclaration
