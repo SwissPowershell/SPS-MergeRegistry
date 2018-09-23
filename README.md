@@ -25,17 +25,21 @@ Registry File output Format (Version 4 or 5)
 **-NoDeletion**
   
 Ignore key and keypair deletion
+
 *[-HKEY_...]* Will be ignored
+
 *"Name"=-* Will be ignored
 		
 **-NoKeyDeletion**
  
 Ignore key deletion
-*[-HKEY_...] * Will be ignored
+
+*[-HKEY_...]* Will be ignored
 		
 **-NoValueDeletion**
   
 Ignore value keypair deletion
+
 *"Name"=-* Will be ignored
 		
 **-NoEmptyKey**
