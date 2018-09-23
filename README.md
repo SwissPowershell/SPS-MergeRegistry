@@ -2,58 +2,58 @@
 Powershell Function to merge optimize and clean registry file(s)
 
 ## Merge-RegistryFiles
-  **-InputFile**
+**-InputFile**
   
-    File to merge / optimize location 
+File to merge / optimize location 
 	
-  **-InputPath**
+**-InputPath**
   
-    Path location containing registry files to merge
+Path location containing registry files to merge
 	
-  **-OutputPath**
+**-OutputPath**
   
-	Output Path (Default ScriptDir\Out)
+Output Path (Default ScriptDir\Out)
 	
-  **-OutputFileName**
+**-OutputFileName**
   
-	Output File Name (Default MergedRegistry.Reg)
+Output File Name (Default MergedRegistry.Reg)
 	
-  **-OutputFormat**
+**-OutputFormat**
   
-	Registry File output Format (Version 4 or 5)
+Registry File output Format (Version 4 or 5)
 	
-  **-NoDeletion**
+**-NoDeletion**
   
-	Ignore key and keypair deletion
-		*[-HKEY_...]* Will be ignored
-		*"Name"=-* Will be ignored
+Ignore key and keypair deletion
+*[-HKEY_...]* Will be ignored
+*"Name"=-* Will be ignored
 		
-  **-NoKeyDeletion**
-  
-    Ignore key deletion
-		*[-HKEY_...] * Will be ignored
+**-NoKeyDeletion**
+ 
+Ignore key deletion
+*[-HKEY_...] * Will be ignored
 		
-  **-NoValueDeletion**
+**-NoValueDeletion**
   
-	Ignore value keypair deletion
-		*"Name"=-* Will be ignored
+Ignore value keypair deletion
+*"Name"=-* Will be ignored
 		
-  **-NoEmptyKey**
+**-NoEmptyKey**
   
-	Ignore Key having no KeyPair (Ignore key full tree declaration)
+Ignore Key having no KeyPair (Ignore key full tree declaration)
 	
-  **-ErrorOnMultiDeclaration**
+**-ErrorOnMultiDeclaration**
   
-	Return an error if a KeyPair is declared more than once
+Return an error if a KeyPair is declared more than once
 	
-  **-ErrorOnConflicts**
+**-ErrorOnConflicts**
   
-	Return an error if a KeyPair is declared more than once with different values (will ignore by default)
+Return an error if a KeyPair is declared more than once with different values (will ignore by default)
 	
-  **-ErrorOnUnreadableFile**
+**-ErrorOnUnreadableFile**
   
-	Return an error if input file is not readable
+Return an error if input file is not readable
 	
-  **-NoProgress**
+**-NoProgress**
   
-	Hide progress bar
+Hide progress bar
