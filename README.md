@@ -1,7 +1,7 @@
 # SwissPowershell Merge Optimize and Clean Registry
 Powershell Function to merge optimize and clean registry file(s)
 
-## Merge-RegistryFiles
+## Merge-RegistryFiles Function
 ###InputFile
 File to merge / optimize location 
 	
