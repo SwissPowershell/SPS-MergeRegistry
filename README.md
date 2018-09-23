@@ -3,7 +3,17 @@ Powershell Function to merge optimize and clean registry file(s)
 
 ## Merge-RegistryFiles
   **-InputFile**
-    Location of the file to merge / optimize
+    File to merge / optimize location 
   **-InputPath**
-    Location of the path containing registry files to merge
-	
+    Path location containing registry files to merge 
+  **-OutputPath**
+  **-OutputFile**
+  **-OutputFormat**
+  **-NoDeletion**
+  **-NoKeyDeletion**
+  **-NoValueDeletion**
+  **-NoEmptyKey**
+  **-ErrorOnMultiDeclaration**
+  **-ErrorOnConflicts**
+  **-ErrorOnUnreadableFile**
+  **-NoProgress**
