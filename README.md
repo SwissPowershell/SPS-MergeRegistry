@@ -29,6 +29,9 @@ Ignore value keypair deletion
 ### -NoEmptyKey
 Ignore Key having no KeyPair (Ignore key full tree declaration)
 
+### -NoFiltering
+Only merge the different registry as is without filtering
+
 ### -ErrorOnMultiDeclaration
 Return an error if a KeyPair is declared more than once
 
@@ -39,5 +42,14 @@ Return an error if a KeyPair is declared more than once with different values (w
 Return an error if input file is not readable
 
 ### -NoProgress
-Hide progress bar
+Hide progress bar to enhance performances on big registry files
 
+### -NoWarnings
+Hide all warnings
+
+## Example
+     $RegistryFile = Merge-RegistryFiles -InputPath 'C:\...\TESTFILES\REGISTRY_TESTIN' -OutputPath 'C:\...\TESTFILES\REGISTRY_OUT' -NoDeletion -OutputFileName "MergedRegistryCoherence.Reg" -NoProgress -ErrorOnConflicts
+	 
+	 $RegistryFile = Merge-RegistryFiles -InputPath 'C:\...\TESTFILES\REGISTRY_TESTIN' -OutputPath 'C:\...\TESTFILES\REGISTRY_OUT' -NoDeletion -NoEmptyKey -OutputFileName "MergedRegistry.Reg" -NoProgress -NoWarning
+	 
+	 $RegistryFile = Merge-RegistryFiles -InputPath 'C:\...\TESTFILES\REGISTRY_TESTIN' -OutputPath 'C:\...\TESTFILES\REGISTRY_OUT' -NoDeletion -NoEmptyKey -ErrorOnUnreadableFile -NoProgress -OutputFileName "Registry.Reg"
