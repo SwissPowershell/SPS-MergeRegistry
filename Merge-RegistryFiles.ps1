@@ -112,11 +112,9 @@
             [Boolean] $Delete = $False
         }
         #Progress and warning
-        $CurrentProgress = $ProgressPreference
         if ($NoProgress){
             $ProgressPreference = 'SilentlyContinue'
         }
-        $CurrentWarning = $WarningPreference
         if ($NoWarning){
             $WarningPreference = 'SilentlyContinue'
         }
@@ -444,6 +442,7 @@
                     }
                     Write-Progress -Activity 'Importing Registry Content...' -Status 'Completed' -Completed
                     #endregion import Registry in a big array of registry key
+                    
                 }
                 $MeasureInternFilter = Measure-Command {
                     if ($NoFiltering -eq $True){
@@ -559,10 +558,7 @@
                 }
                 Write-Progress -Activity 'Consolidating Registry Objects...' -Status 'Completed' -Completed
             }
-            End {
-                if ($NoProgress){
-                    $ProgressPreference = $CurrentProgress
-                }    
+            End {   
                 if (($ConflictErrorFound -and $ErrorOnConflicts) -or $MultiDeclarationErrorFound -or $FatalError){
                     $ConsolidatedRegistryObject = $False
                 }

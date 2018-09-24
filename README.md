@@ -44,7 +44,7 @@ Return an error if input file is not readable
 ### -NoProgress
 Hide progress bar to enhance performances on big registry files
 
-### -NoWarnings
+### -NoWarning
 Hide all warnings
 
 ## Example
