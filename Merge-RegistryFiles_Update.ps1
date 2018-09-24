@@ -520,40 +520,6 @@
                         }
                     }
                 }
-
-
-                $MultiNameDeclarationList =  ($NewKey.Values | Group-Object -Property Name)| Where {$_.Count -gt 1}
-                #Group by name
-                ForEach ($MultiNameDeclaration in $MultiNameDeclarationList){
-                    #Group by Value
-                    $GroupedByValue = @($MultiNameDeclaration.Group | Group-Object -Property Value)
-                    if ($GroupedByValue.count -ne 1){
-                        #The KeyPair is declared with different Values
-                        $KeyPairKey = $GroupedByValue[0].Group[0].ExtractedParent
-                        $KeyPairName = $GroupedByValue[0].Group[0].Name
-                        $KeyPairValues = $GroupedByValue.Name -Join ','
-                        $ConflictsCount = $GroupedByValue.Count
-                        $KeyPairCount = $GroupedByValue.Group.Count
-                        Write-Warning "Key $($KeyPairKey) as a Keypair declared $($KeyPairCount) times with $($ConflictsCount) different values : $($KeyPairName)=($($KeyPairValues))"
-                        if ($ErrorOnMultiDeclaration){
-                            Write-Error 'MultiDeclaration Error : One or more key declared more than once see warnings' -RecommendedAction 'Review your registry files'                            
-                            $MultiDeclarationErrorFound = $True
-                        }Elseif ($ErrorOnConflicts){
-                            Write-Error 'Conflict Error : One or more key declared with a different value see Warnings' -RecommendedAction 'Review your registry files'
-                            $ConflictErrorFound = $True
-                        }
-                    }Else{
-                        #The KeyPair is declared with the same name and the same value
-                        $KeyPairKey = $GroupedByValue[0].Group[0].ExtractedParent
-                        $KeyPairExtractedValue = $GroupedByValue[0].Group[0].ExtractedValue
-                        $KeyPairCount = $GroupedByValue[0].Group.Count
-                        Write-Warning "Key $($KeyPairKey) as a Keypair declared $($KeyPairCount) times with the same value : $($KeyPairExtractedValue)"
-                        if ($ErrorOnMultiDeclaration){
-                            Write-Error 'MultiDeclaration Error : One or more key declared more than once see warnings' -RecommendedAction 'Review your registry files'                            
-                            $MultiDeclarationErrorFound = $True                        
-                        }
-                    }
-                }
                 $ConsolidatedRegistryObject.Add($NewKey)
             }
 
