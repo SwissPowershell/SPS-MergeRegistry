@@ -121,6 +121,11 @@ Class RegistryKey {
                                 $This.UnknowLines.add($($ValueList[$i..($ValueList.Count - 1)])) | out-null
                                 BREAK
                             }
+                            if ($i -eq ($ValueList.Count - 1)) {
+                                # Reached the end of the value
+                                $ValueKeyPair = [RegistryValue]::New($This.File, $This.Key, $This.Hive, $Name, $NewValueList -join "`r`n")
+                                $This.Values.Add($ValueKeyPair)
+                            }
                         }
                     }ElseIf($Value -match $DwordValue) {
                         # a DWORD Value cannot be multiline...
@@ -227,9 +232,12 @@ Class Registry {
     }
     hidden [Void] __convertContent(){
         $HivePattern = [RegistryHive]::GetNames([RegistryHive]) -join '|'
-        [Regex] $RegexKey = "(?<FullKey>([\t ]*\[(?<KeyDeletion>-)?(?<Key>(?<Hive>$($HivePattern))(?<KeyPath>.*))\]))"
+        # [Regex] $RegexKey = "(?<FullKey>([\t ]*\[(?<KeyDeletion>-)?(?<Key>(?<Hive>$($HivePattern))(?<KeyPath>.*))\]))"
+        # [Regex] $KeyLike = "(?<FullKey>([\t ]*\[(?<KeyDeletion>-)?(?<Key>(?<Hive>.*)(?<KeyPath>\\.*))\]))" # To handle malformated keys
+        [Regex] $RegexKey = "(\n|^)(?<FullKey>([\t ]*\[(?<KeyDeletion>-)?(?<Key>(?<Hive>$($HivePattern))(?<KeyPath>.*))\]))"
+        [Regex] $KeyLike = "(\n|^)(?<FullKey>([\t ]*\[(?<KeyDeletion>-)?(?<Key>(?<Hive>.*)(?<KeyPath>\\.*))\]))"
         # Search all Key in the content 
-        $KeyResult = Select-String -InputObject $This.__content -Pattern $RegexKey -AllMatches
+        $KeyResult = Select-String -InputObject $This.__content -Pattern $KeyLike -AllMatches
         # init the remaining content
         $RemainingContent = ''
         if ($KeyResult) {
@@ -239,7 +247,7 @@ Class Registry {
                 $Match = $KeyResult.Matches[$i]
                 $Groups = $Match.Groups
                 $StartPos = $Match.Index + $Match.Length
-                If($i -eq 0){
+                If ($i -eq 0){
                     #Get the remaining content, remove empty lines
                     $RemainingContent = ($This.__content.Substring(0,$Match.Index) -Split '\r\n') | Where-Object {$_.Trim()}
                 }
@@ -252,12 +260,19 @@ Class Registry {
                     # everything between the key and the next key are the values
                     $ValuesContent = $This.__content.Substring($StartPos,$Length)
                 }
-                $Hive = $Groups | Where-Object {$_.Name -eq 'Hive'} | Select-Object -ExpandProperty 'Value'
-                $KeyPath = $Groups | Where-Object {$_.Name -eq 'KeyPath'} | Select-Object -ExpandProperty 'Value'
-                $RegKey = $Groups | Where-Object {$_.Name -eq 'Key'} | Select-Object -ExpandProperty 'Value'
-                $KeyDeletion = ($Groups | Where-Object {$_.Name -eq 'KeyDeletion'} | Select-Object -ExpandProperty 'Value') -eq '-'
-                $Key = [RegistryKey]::New($this.File,$RegKey,$Hive,$KeyPath,$ValuesContent,$KeyDeletion)
-                $This.Keys.Add($Key)
+                $FullKey = $Groups | Where-Object {$_.Name -eq 'FullKey'} | Select-Object -ExpandProperty 'Value'
+                if ($FullKey -match $RegexKey) {
+                    $Hive = $Groups | Where-Object {$_.Name -eq 'Hive'} | Select-Object -ExpandProperty 'Value'
+                    $KeyPath = $Groups | Where-Object {$_.Name -eq 'KeyPath'} | Select-Object -ExpandProperty 'Value'
+                    $RegKey = $Groups | Where-Object {$_.Name -eq 'Key'} | Select-Object -ExpandProperty 'Value'
+                    $KeyDeletion = ($Groups | Where-Object {$_.Name -eq 'KeyDeletion'} | Select-Object -ExpandProperty 'Value') -eq '-'
+                    $Key = [RegistryKey]::New($this.File,$RegKey,$Hive,$KeyPath,$ValuesContent,$KeyDeletion)
+                    $This.Keys.Add($Key)
+                }Else{
+                    # A Malformated key has been found store what 'Seems' to be part of it as remaining content
+                    # Write-Warning "Malformated key found: $FullKey"
+                    $RemainingContent = $RemainingContent + $FullKey + $ValuesContent.Trim()
+                }
             }
             # handle anything found before the first key
             # it can only contains empty line or comment lines

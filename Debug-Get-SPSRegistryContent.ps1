@@ -58,7 +58,7 @@ Write-Host "`t The result is null: $($Null -eq $Conflict_ValueDeletion)" -Foregr
 
 # Conflict_Value.reg is a registry file with value conflict there should be no issue reading it
 Write-Host "Reading a registry file with value conflict (this should not generate any warning or errors)" -ForegroundColor Magenta
-$Conflict_Value = Get-SPSRegistryContent -File "$($TestRoot)\Conflict_Value.reg"
+$Conflict_Value = Get-SPSRegistryContent -File "$($TestRoot)\Conflict_ValueConflict.reg"
 Write-Host "`t The result is null: $($Null -eq $Conflict_Value)" -ForegroundColor Green
 
 # PourlyFormated.reg is a registry file with pourly formated content there should be no issue reading it
