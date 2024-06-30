@@ -1,6 +1,6 @@
 Enum RegistryVersion {
-    V4
-    V5
+    V4 = 4
+    V5 = 5
 }
 Enum RegistryHive {
     HKEY_CLASSES_ROOT
@@ -334,6 +334,7 @@ Function Get-SPSRegistryContent {
     #>
     Param(
         [Parameter(
+            Position = 1,
             Mandatory = $True,
             ValueFromPipeline = $True,
             ValueFromPipelineByPropertyName = $True,
@@ -343,6 +344,7 @@ Function Get-SPSRegistryContent {
         [ValidateScript({Test-Path $_ -PathType Leaf},ErrorMessage="The input should be an existing file")]
         [System.IO.FileInfo[]] $File,
         [Parameter(
+            Position = 2,
             Mandatory = $False,
             HelpMessage = 'Set the strict mode for the function'
         )]
@@ -429,12 +431,14 @@ Function Merge-SPSRegistryContent {
     #>
     Param(
         [Parameter(
+            Position = 1,
             Mandatory = $True,
             ParameterSetName = 'byRegistry',
             HelpMessage = 'The registry object to merge.'
         )]
         [Registry[]] $InputObject,
         [Parameter(
+            Position = 1,
             Mandatory = $True,
             ParameterSetName = 'byPath',
             HelpMessage = 'The path containing registry files to merge.'
@@ -443,52 +447,62 @@ Function Merge-SPSRegistryContent {
         [ValidateScript({Test-Path $_ -PathType Container},ErrorMessage="The input should be an existing folder")]
         [System.IO.FileInfo[]] $Path,
         [Parameter(
+            Position = 2,
             Mandatory = $False,
             ParameterSetName = 'byPath',
             HelpMessage = 'Set the strict mode for the function.'
         )]
         [Switch] ${Strict},
         [Parameter(
+            Position = 3,
             ParameterSetName='__AllParameterSets',
             HelpMessage='Output path for the merged registry file.'
         )]
         [String] ${OutputPath}="$($PSScriptRoot)\output",
         [Parameter(
+            Position = 4,
             ParameterSetName='__AllParameterSets',
             HelpMessage='Output file name for the merged registry file.'
         )]
         [String] ${OutputFileName}='MergedRegistry.reg',
         [Parameter(
+            Position = 5,
             ParameterSetName='__AllParameterSets',
             HelpMessage='Output format for the merged registry file (4 for REGEDIT4, 5 for Windows Registry Editor Version 5.00).'
         )]
         [ValidateSet(4,5)]
         [Int32] ${OutputFormat}=5,
         [Parameter(
+            Position = 6,
             ParameterSetName='__AllParameterSets',
             HelpMessage='Exclude all deletion from the merged registry file.'
         )]
         [Switch] ${NoDeletion},
         [Parameter(
+            Position = 7,
             ParameterSetName='__AllParameterSets',
             HelpMessage='Exclude Key deletion from the merged registry file.'
         )]
         [Switch] ${NoKeyDeletion},
         [Parameter(
+            Position = 8,
             ParameterSetName='__AllParameterSets',
             HelpMessage='Exclude Value deletion from the merged registry file.'
         )]
         [Switch] ${NoValueDeletion},
         [Parameter(
+            Position = 9,
             ParameterSetName='__AllParameterSets',
             HelpMessage='Throw a warning message on multi declaration.'
         )]
         [Switch] ${MultiDeclarationWarning},
         [Parameter(
+            Position = 10,
             ParameterSetName='__AllParameterSets',
             HelpMessage='Ignore conflicts if this switch is set no error will be thrown for conflicting values.')]
         [Switch] ${IgnoreConflicts},
         [Parameter(
+            Position = 11,
             ParameterSetName='__AllParameterSets',
             HelpMessage='Return the merged registry object.')]
         [Switch] ${Passthru}
