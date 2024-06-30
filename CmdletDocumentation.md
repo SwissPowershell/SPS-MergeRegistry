@@ -193,7 +193,7 @@ This command retrieve all registry file present in `C:\Registry` and convert the
 **\-NoDeletion**
 
     the NoDeletion <Switch> parameter define if deletion present in inputed <registry> files or objects should be ignored.
-    Settings NoDeletion will make NoKeyDeletion and NoValueDeletion to $true
+    Settings NoDeletion will set the NoKeyDeletion and NoValueDeletion <switch> to $true
 
 | <!-- -->               | <!-- -->           |
 |:-----------------------|:-------------------|
