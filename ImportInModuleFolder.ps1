@@ -24,5 +24,3 @@ Copy-Item -Path $PSScriptRoot -Destination $DestinationPath -Recurse -Force
 
 # Import the module using its name and version.
 Import-Module -Name $ModuleName -Version $ModuleVersion -Force
-
-# end of the import
