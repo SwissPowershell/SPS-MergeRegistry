@@ -7,10 +7,12 @@ Powershell Module to help dealing with registry files
 > Files under **\TestFiles\\** will only create key under [HKEY_CURRENT_USER\SOFTWARE\SPS-MergeRegistry].
 
 > [!WARNING]  
-> While files under **\TestFiles\\** are safe to merge in your registry, altering your own registry may be done with cautious never import a registry file without knowing it's content.
+> While files under **\TestFiles\\** are safe to import, altering your own registry may be done with precaution.
+> Never import a registry file without knowing it's content.
 
 > [!IMPORTANT]  
-> Your registry will **never** be altered with these function. it will only output Reg files or [Registry] object.
+> Your registry will **never** be altered with these function.
+> it will only output Reg files or [Registry] object.
 
 ## Usage
 
