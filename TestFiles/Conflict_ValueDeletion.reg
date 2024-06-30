@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\SPS-MergeRegistry\KeyDeletion]
+@=-
+"String"=-
+"\\ String with backslash \\"=-
+"\\\\ String with double backslash \\\\"=-

@@ -1,0 +1,13 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\SPS-MergeRegistry]
+
+[HKEY_CURRENT_USER\Software\SPS-MergeRegistry\Classic]
+
+[HKEY_CURRENT_USER\Software\SPS-MergeRegistry\EmptyKey]
+
+[HKEY_CURRENT_USER\Software\SPS-MergeRegistry\KeyConflict]
+
+[HKEY_CURRENT_USER\Software\SPS-MergeRegistry\KeyDeletion]
+
+[HKEY_CURRENT_USER\Software\SPS-MergeRegistry\Unicode]
