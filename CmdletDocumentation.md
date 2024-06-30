@@ -134,7 +134,8 @@ This command retrieve all registry file present in `C:\Registry` and convert the
 
 **\-Strict**
 
-    the Strict <Switch> parameter define if the function should allow malformed lines in the registry file. otherwyse these lines as stored in an UnknownLines parameter in the outputed <Registry> Object / registry file.
+    the Strict <Switch> parameter define if the function should allow malformed lines in the registry file. 
+    Otherwyse these lines as stored in an UnknownLines parameter in the outputed <Registry> Object / registry file.
 
 | <!-- -->               | <!-- -->           |
 |:-----------------------|:-------------------|
@@ -244,7 +245,8 @@ This command retrieve all registry file present in `C:\Registry` and convert the
 
 **\-IgnoreConflicts**
 
-    the IgnoreConflicts <Switch> parameter define if a warning should be thrown when a registry name is set with different value. If ommited registry name with different value will throw an error.
+    the IgnoreConflicts <Switch> parameter define if a warning should be thrown when a registry name is set with different value. 
+    If ommited registry name with different value will throw an error.
 
 | <!-- -->               | <!-- -->           |
 |:-----------------------|:-------------------|
