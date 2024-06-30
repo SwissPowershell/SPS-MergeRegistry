@@ -11,6 +11,7 @@ Enum RegistryHive {
     HKEY_PERFORMANCE_DATA
     HKEY_DYN_DATA
 }
+# MARK: RegistryValue Class
 Class RegistryValue {
     [System.Collections.Generic.List[System.IO.FileInfo]]   ${File} = [System.Collections.Generic.List[System.IO.FileInfo]]::New()
     [String]                                                ${ParentHive} = ''
@@ -47,6 +48,7 @@ Class RegistryValue {
         Return $Str
     }
 }
+# MARK: RegistryKey Class
 Class RegistryKey {
     [System.Collections.Generic.List[System.IO.FileInfo]]   ${File} = [System.Collections.Generic.List[System.IO.FileInfo]]::New()
     [String]                                                ${Key} = ''
@@ -165,6 +167,7 @@ $($Value.ToString())
         Return $String
     }
 }
+# MARK: Registry Class
 Class Registry {
     [System.Collections.Generic.List[System.IO.FileInfo]]   ${File} = [System.Collections.Generic.List[System.IO.FileInfo]]::New()
     [System.Text.Encoding]                                  ${Encoding} = [System.Text.Encoding]::Default
@@ -302,6 +305,7 @@ $($Key.ToString())
         Return $String
     }
 }
+# MARK: Get-SPSRegistryContent
 Function Get-SPSRegistryContent {
     [CMDLetBinding()]
     <#
@@ -376,6 +380,7 @@ Function Get-SPSRegistryContent {
         #endregion Function closing DO NOT REMOVE
     }
 }
+# MARK: Merge-SPSRegistryContent
 Function Merge-SPSRegistryContent {
     [CMDLetBinding(DefaultParameterSetName = 'byRegistry')]
     <#
