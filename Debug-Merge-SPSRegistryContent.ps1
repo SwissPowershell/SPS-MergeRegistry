@@ -109,3 +109,6 @@ Write-Host "`t ==> The result is null: $($Null -eq $KeyDeletionConflictMerged_De
 Write-Host "==> Merging all the registry files with a valueDeletion using ignoreDeletion (this should not generate an error)" -ForegroundColor Magenta
 $ValueDeletionConflictMerged_DelIgnored = Merge-SPSRegistryContent -InputObject $ValueDeletionConflictRegObj -Passthru -NoDeletion -Verbose:$False
 Write-Host "`t ==> The result is null: $($Null -eq $ValueDeletionConflictMerged_DelIgnored)" -ForegroundColor Green
+
+# Create the merged file (not using passthru)
+Merge-SPSRegistryContent -InputObject $AllNonConflictingRegsObj -Verbose:$False

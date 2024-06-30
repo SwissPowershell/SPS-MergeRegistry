@@ -486,15 +486,6 @@ Function Merge-SPSRegistryContent {
         if ($PSCmdlet.ParameterSetName -eq 'byPath') {
             $InputObject = Get-ChildItem -Path $Path -File | Get-SPSRegistryContent -Strict:$Strict
         }
-        # Create the output folder if not exist
-        if (-not (Test-Path -Path $OutputPath -PathType Container)) {
-            New-Item -Path $OutputPath -ItemType Directory | out-null
-        }
-        # Check for the output file and remove if exist
-        $OutputFile = Join-Path -Path $OutputPath -ChildPath $OutputFileName
-        if (Test-Path -Path $OutputFile -PathType Leaf) {
-            Remove-Item -Path $OutputFile -Force | out-null
-        }
         # Create the output object to store the merged registry
         $OutputRegistry = [Registry]::New()
         if ($OutputFormat -eq 4) {
@@ -604,9 +595,19 @@ Function Merge-SPSRegistryContent {
         Write-Verbose "Ending : $($MyInvocation.MyCommand) - TimeSpent : $($TimeSpentString)"
         #endregion Function closing DO NOT REMOVE
         #region outputing
-        $OutputRegistry.ToString() | Out-File -FilePath $OutputFile -Encoding UTF8
         if ($Passthru) {
             Write-Output $OutputRegistry
+        }else{
+            # Create the output folder if not exist
+            if (-not (Test-Path -Path $OutputPath -PathType Container)) {
+                New-Item -Path $OutputPath -ItemType Directory | out-null
+            }
+            # Check for the output file and remove if exist
+            $OutputFile = Join-Path -Path $OutputPath -ChildPath $OutputFileName
+            if (Test-Path -Path $OutputFile -PathType Leaf) {
+                Remove-Item -Path $OutputFile -Force | out-null
+            }
+            $OutputRegistry.ToString() | Out-File -FilePath $OutputFile -Encoding UTF8
         }
         #endregion outputing
     }
