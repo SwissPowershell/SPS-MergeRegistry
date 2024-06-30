@@ -3,7 +3,6 @@ $ModuleName = $PSD1.RootModule -replace '\.psm1$'
 $ModuleVersion = $PSD1.ModuleVersion
 $UserPSModuleRootPath = $Env:PSModulePath.Split(';') | Where-Object {$_ -like "$Env:USERPROFILE\*"} | Select-Object -First 1
 $DestinationPath = "$($UserPSModuleRootPath)\$($ModuleName)\$($ModuleVersion)"
-Set-Location -Path $PSScriptRoot
 # Remove the module (if loaded).
 if (Get-Module -Name $ModuleName -ErrorAction Ignore) {
     Try {
@@ -25,6 +24,3 @@ Copy-Item -Path $PSScriptRoot -Destination $DestinationPath -Recurse -Force
 
 # Import the module using its name and version.
 Import-Module -Name $ModuleName -Version $ModuleVersion -Force
-
-Git commit -a -am "New Commit on $(get-date -format 'MM.dd.yyyy_HH_mm_ss')"
-Git push 
