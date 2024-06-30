@@ -101,3 +101,5 @@ Try {
     $AllRegistries_Strict = $null
 }
 Write-Host "`t The result is null: $($Null -eq $AllRegistries_Strict)" -ForegroundColor Green
+
+# end of the test

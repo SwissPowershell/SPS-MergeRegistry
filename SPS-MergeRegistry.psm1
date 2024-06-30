@@ -261,6 +261,7 @@ Class Registry {
                     $ValuesContent = $This.__content.Substring($StartPos,$Length)
                 }
                 $FullKey = $Groups | Where-Object {$_.Name -eq 'FullKey'} | Select-Object -ExpandProperty 'Value'
+                # Check that the detected key is really a key and not a malformed key
                 if ($FullKey -match $RegexKey) {
                     $Hive = $Groups | Where-Object {$_.Name -eq 'Hive'} | Select-Object -ExpandProperty 'Value'
                     $KeyPath = $Groups | Where-Object {$_.Name -eq 'KeyPath'} | Select-Object -ExpandProperty 'Value'

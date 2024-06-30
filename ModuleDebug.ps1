@@ -42,4 +42,4 @@ $TimeSpentInDebugScript = New-TimeSpan -Start $DebugStart -Verbose:$False -Error
 ForEach ($Unit in $TimeUnits.GetEnumerator()) {if ($TimeSpentInDebugScript.($Unit.Key) -gt 1) {$TimeSpentString = $Unit.Value;break}};if (-not $TimeSpentString) {$TimeSpentString = "$($TimeSpentInDebugScript.Ticks) Ticks"}
 Write-Host "Ending : " -ForegroundColor Yellow -NoNewLine; Write-Host $($MyInvocation.MyCommand) -ForegroundColor Magenta -NoNewLine;Write-Host " - TimeSpent : " -ForegroundColor Yellow -NoNewLine; Write-Host $TimeSpentString -ForegroundColor Magenta
 
-
+# end of the Debug

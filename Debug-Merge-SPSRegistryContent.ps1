@@ -112,3 +112,5 @@ Write-Host "`t ==> The result is null: $($Null -eq $ValueDeletionConflictMerged_
 
 # Create the merged file (not using passthru)
 Merge-SPSRegistryContent -InputObject $AllNonConflictingRegsObj -Verbose:$False
+
+# end of the test

@@ -38,3 +38,4 @@ Merge-SPSRegistryContent -Path 'C:\Registry' -OutputPath 'C:\Merged\' -OutputFil
 ```
 
 This command merges all registry file present in `C:\Registry` into a new registry file named `Merged.reg` and located at `C:\Merged\`.
+

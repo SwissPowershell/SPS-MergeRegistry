@@ -94,4 +94,4 @@ Windows Registry Editor Version 5.00
 "StringWithDoubleQuote\""="this string has some orphan double quote \" in it"
 "StringWithSingleBackSlash\\"="this string has some orphan single backslash \\ in it"
 "StringWithDoubleBackSlash\\\\"="this string has some orphan double backslash \\\\ in it"
-
+;End of the file
