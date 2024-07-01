@@ -270,3 +270,31 @@ This command retrieve all registry file present in `C:\Registry` and convert the
 | Accept pipeline input: | false              |
 | <!-- -->               | <!-- -->           |
 
+## Class [Registry]
+
+### Properties
+**File** <System.io.FileInfo[]>
+
+    The source file path used to generate the object.
+
+**Encoding** <System.Text.Encoding>
+
+    The detected file encoding format
+
+**Version** <RegistryVersion>
+
+    The file's registry version
+
+**Keys** <RegistryKey[]>
+
+    Each of the key detected in the registry
+
+**Comments** <String[]>
+
+    Comments found in the registry (before the first key), other comment will be stored in their respective key object.
+
+**UnknownLines** <String[]>
+
+    Unreadable lines found in the registry.
+
+
