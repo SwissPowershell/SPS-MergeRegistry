@@ -14,7 +14,7 @@ Powershell Module to help dealing with registry files
 > Your registry will **never** be altered with these function.
 > it will only output Reg files or [Registry] object.
 
-## the story behind
+## The story behind this project
 As a packager I often receive many reg files from my loved devs.
 While doing my CI/CD project I had to pass theses refistry files into Wix Packaging tool to generate the MSI file that i then use.
 there was deveral problem:
