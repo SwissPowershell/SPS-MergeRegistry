@@ -75,7 +75,7 @@ Merge several different .reg (and non .reg) files together. Testing and showing 
 .\Debug-Merge-SPSRegistryContent.ps1
 ````
 
-Debug the module <u>while beeing in the module folder</u>. It force import the module and measure the execution of both Debug-*.ps1 scripts in a "production" environment. This script will not run while in an another location than the `$Env:PSModulePath` aside of the .psm1 and .psd1 files.
+Debug the module <u>while beeing in the module folder</u>. It force import the module and measure the execution of both Debug-*.ps1 scripts in a "production" environment. This script will not run while in an another location than the `$Env:PSModulePath\SPS-MergeRegistry\Version` aside of the .psm1 and .psd1 files.
 
 ```powershell
 .\ModuleDebug.ps1
