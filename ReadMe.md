@@ -14,6 +14,28 @@ Powershell Module to help dealing with registry files
 > Your registry will **never** be altered with these function.
 > it will only output Reg files or [Registry] object.
 
+## the story behind
+As a packager I often receive many reg files from my loved devs.
+While doing my CI/CD project I had to pass theses refistry files into Wix Packaging tool to generate the MSI file that i then use.
+there was deveral problem:
+
+- I need to run the wix registry parser for each file wich slow down the process
+- Due to quality of delivered reg files, some where rejected by wix.
+- As the final goal was to create an msi package, registry deletion, key deletion and comments where useless in my situation.
+- And none the less sometime key/value where overlapping and conflictin. There was no solution do detect value conflict.
+
+I can't count all call i had from dev saying "you did not put the right value despite I delivered it" (yes you gave me one time true and one time false)
+
+I needed something solid to read, merge and validate the delivered registry files.
+I also needed to return error if some value where conflicting.
+
+This lead me to this module.
+
+It make my life easy and I used it to train my Regex.
+I hope it can help other people strugling with registry files.
+
+
+
 ## Usage
 
 To use this module, follow these steps:
