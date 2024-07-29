@@ -647,8 +647,8 @@ Function Merge-SPSRegistryContent {
         #endregion outputing
     }
 }
-#region Export the types to the session as type accelerators. (thanks to Gael Colas for the heads up on this approach)
-$ExportableTypes =@([Registry])
+#region Expose the types and enums to the session as type accelerators. (thanks to Gael Colas for the heads up on this approach)
+$ExportableTypes =@([Registry],[RegistryHive],[RegistryKey],[RegistryValue],[RegistryVersion])
 # Get the internal TypeAccelerators class to use its static methods.
 $TypeAcceleratorsClass = [PSObject].Assembly.GetType('System.Management.Automation.TypeAccelerators')
 # Ensure none of the types would clobber an existing type accelerator.
