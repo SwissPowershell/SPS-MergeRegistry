@@ -41,11 +41,11 @@ Class RegistryValue {
     }
     [String] ToString() {
         if ($This.Name -eq '@') {
-            $Str = "$($this.Name)=$($this.Value)"
+            $Output = "$($this.Name)=$($this.Value)"
         }Else{
-            $Str = "`"$($this.Name)`"=$($this.Value)"
+            $Output = "`"$($this.Name)`"=$($this.Value)"
         }
-        Return $Str
+        Return $Output
     }
 }
 # MARK: RegistryKey Class
@@ -153,18 +153,18 @@ Class RegistryKey {
         }
     }
     [string] ToString() {
-        $String = $This.Key
+        $Output = $This.Key
         if ($This.Delete -eq $True) {
-            $String = "-$String"
+            $Output = "-$($Output)"
         }
-        $String = "[$String]"
+        $Output = "[$($Output)]"
         ForEach ($Value in $This.Values) {
-            $String = @"
-$String
+            $Output = @"
+$Output
 $($Value.ToString())
 "@
         }
-        Return $String
+        Return $Output
     }
 }
 # MARK: Registry Class
@@ -286,23 +286,23 @@ Class Registry {
         }
     }
     [String] ToString() {
-        $String = ''
+        $Title = ''
         if ($This.Version -eq [RegistryVersion]::V4) {
-            $String = 'REGEDIT4'
+            $Title = 'REGEDIT4'
         }Else{
-            $String = 'Windows Registry Editor Version 5.00'
+            $Title = 'Windows Registry Editor Version 5.00'
         }
-        $String = @"
-$String
+        $Output = @"
+$Title
+
 "@
         ForEach ($Key in $This.Keys) {
-            $String = @"
-$String
-
+            $Output = @"
+$Output
 $($Key.ToString())
 "@
         }
-        Return $String
+        Return $Output
     }
 }
 # MARK: Get-SPSRegistryContent
@@ -648,7 +648,7 @@ Function Merge-SPSRegistryContent {
     }
 }
 #region Export the types to the session as type accelerators. (thanks to Gael Colas for the heads up on this approach)
-$ExportableTypes =@([Registry])
+$ExportableTypes =@([Registry],[RegistryKey],[RegistryValue],[RegistryHive],[RegistryVersion])
 # Get the internal TypeAccelerators class to use its static methods.
 $TypeAcceleratorsClass = [PSObject].Assembly.GetType('System.Management.Automation.TypeAccelerators')
 # Ensure none of the types would clobber an existing type accelerator.
@@ -660,13 +660,7 @@ ForEach ($Type in $ExportableTypes) {
             "Unable to register type accelerator '$($Type.FullName)'"
             'Accelerator already exists.'
         ) -join ' - '
-        $ErrorRecord = [System.Management.Automation.ErrorRecord]::new(
-            [System.InvalidOperationException]::new($Message),
-            'TypeAcceleratorAlreadyExists',
-            [System.Management.Automation.ErrorCategory]::InvalidOperation,
-            $Type.FullName
-        )
-        throw $ErrorRecord
+        Write-Warning -Message $Message
     }
 }
 # Add type accelerators for every exportable type.
@@ -676,7 +670,7 @@ ForEach ($Type in $ExportableTypes) {
 # Remove type accelerators when the module is removed.
 $MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
     ForEach ($Type in $ExportableTypes) {
-        $TypeAcceleratorsClass::Remove($Type.FullName)
+        $TypeAcceleratorsClass::Remove($Type.FullName) | out-null
     }
 }.GetNewClosure() | out-null
 #endregion Export the types to the session as type accelerators.
